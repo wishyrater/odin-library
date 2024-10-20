@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     addBookToLibrary(harryPotter);
     addBookToLibrary(gameOfThrones);
     
-    const table = document.querySelector("#library");
+    const tableBody = document.querySelector("#library tbody");
     
     myLibrary.forEach((book) => {
         const tableRow = document.createElement("tr");
@@ -26,19 +26,35 @@ document.addEventListener("DOMContentLoaded", function () {
             tableData.textContent = book[key];
             tableRow.appendChild(tableData);
         }
-        table.appendChild(tableRow);
+        tableBody.appendChild(tableRow);
     });
 
+    const showButton = document.querySelector("#show-dialog-button");
     const dialog = document.querySelector("dialog");
-    const addButton = document.querySelector("#add");
-    const submitButton = document.querySelector("button[type='submit']");
+    const confirmButton = document.querySelector("#confirm");
+    const titleEl = document.querySelector("#title");
+    const authorEl = document.querySelector("#author");
+    const pagesEl = document.querySelector("#pages");
 
-    addButton.addEventListener("click", () => {
+    showButton.addEventListener("click", () => {
         dialog.showModal();
     });
 
-    submitButton.addEventListener("click", () => {
-        dialog.close();
-    })
+    dialog.addEventListener("close", () => {
+        if (dialog.returnValue === "default" && (titleEl.value && authorEl.value && pagesEl.value)) {
+            let newBook = new Book(titleEl.value, authorEl.value, pagesEl.value);
+            const tableRow = document.createElement("tr");
+            for (key in newBook) {
+                const tableData = document.createElement("td");
+                tableData.textContent = newBook[key];
+                tableRow.appendChild(tableData);
+            }
+            tableBody.appendChild(tableRow);
+        }
+    });
 
+    confirmButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        dialog.close(confirmButton.value);
+    });
 });
