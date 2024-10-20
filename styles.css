@@ -36,3 +36,22 @@ body {
 #library tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
+
+#show-dialog-button {
+    background-color: #009879;
+    color: #f3f3f3;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+#show-dialog-button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#show-dialog-button:active {
+    transform: scale(1.1);
+}
