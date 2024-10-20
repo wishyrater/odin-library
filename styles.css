@@ -45,6 +45,7 @@ body {
     border-radius: 8px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
+    margin-bottom: 20px;
 }
 
 #show-dialog-button:hover {
@@ -54,4 +55,51 @@ body {
 
 #show-dialog-button:active {
     transform: scale(1.1);
+}
+
+#dialog {
+    height: 300px;
+    width: 300px;
+
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#dialog[open] {
+    opacity: 1;
+}
+
+.form-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-item {
+    display: grid;
+    gap: 5px;
+}
+
+.form-item input {
+    padding: 5px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.form-buttons button {
+    background-color: #009879;
+    background-color: #009879;
+    color: #f3f3f3;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.form-buttons button:hover {
+    cursor: pointer;
 }
