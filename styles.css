@@ -50,7 +50,7 @@ body {
 
 #show-dialog-button:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 #show-dialog-button:active {
