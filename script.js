@@ -18,16 +18,18 @@ document.addEventListener("DOMContentLoaded", function () {
     addBookToLibrary(gameOfThrones);
     
     const tableBody = document.querySelector("#library tbody");
-    
-    myLibrary.forEach((book) => {
+
+    function addBookToTable(book) {
         const tableRow = document.createElement("tr");
-        for (let key in book) {
+        for (key in book) {
             const tableData = document.createElement("td");
             tableData.textContent = book[key];
             tableRow.appendChild(tableData);
         }
         tableBody.appendChild(tableRow);
-    });
+    }
+    
+    myLibrary.forEach((book) => addBookToTable(book));
 
     const showButton = document.querySelector("#show-dialog-button");
     const dialog = document.querySelector("dialog");
@@ -43,13 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dialog.addEventListener("close", () => {
         if (dialog.returnValue === "default" && (titleEl.value && authorEl.value && pagesEl.value)) {
             let newBook = new Book(titleEl.value, authorEl.value, pagesEl.value);
-            const tableRow = document.createElement("tr");
-            for (key in newBook) {
-                const tableData = document.createElement("td");
-                tableData.textContent = newBook[key];
-                tableRow.appendChild(tableData);
-            }
-            tableBody.appendChild(tableRow);
+            addBookToTable(newBook);
         }
     });
 
