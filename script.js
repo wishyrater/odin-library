@@ -1,11 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
     const myLibrary = [];
 
-    function Book(title, author, pages) {
+    function Book(title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
+        this.read = read;
     };
+
+    Book.prototype.toggleRead = function() {
+        this.read ? this.read = false : this.read = true;
+    };
+
+    const thisfunc = function(){
+        console.log(123);
+    }
+
+    console.log(typeof thisfunc);
+    console.log(typeof thisfunc == 'function');
 
     const addBookToLibrary = (book) => myLibrary.push(book);
 
@@ -16,10 +28,23 @@ document.addEventListener("DOMContentLoaded", () => {
         myLibrary.forEach((book) => {
             const tableRow = document.createElement("tr");
             for (let key in book) {
-                const tableData = document.createElement("td");
-                tableData.textContent = book[key];
-                tableRow.appendChild(tableData);
+                if (typeof book[key] !== 'function') {
+                    const tableData = document.createElement("td");
+                    tableData.textContent = book[key];
+                    tableRow.appendChild(tableData);
+                }
             }
+            const toggleReadCell = document.createElement("td");
+            const toggleReadButton = document.createElement("button");
+            toggleReadButton.textContent = 'Toggle read';
+            toggleReadButton.setAttribute("data-index", myLibrary.indexOf(book));
+            toggleReadButton.addEventListener("click", (e) => {
+                const index = e.target.getAttribute("data-index");
+                myLibrary.at(index).toggleRead();
+                addBooksToTable(myLibrary);
+            });
+            toggleReadCell.appendChild(toggleReadButton);
+            tableRow.appendChild(toggleReadCell);
             const removeCell = document.createElement("td");
             const removeButton = document.createElement("button");
             removeButton.textContent = 'Remove';
@@ -35,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    const harryPotter = new Book("Harry Potter", "J.K. Rowling", 295);
-    const gameOfThrones = new Book("A Clash of Kings", "George R.R. Martin", 348);
+    const harryPotter = new Book("Harry Potter", "J.K. Rowling", 295, true);
+    const gameOfThrones = new Book("A Clash of Kings", "George R.R. Martin", 348, false);
 
     addBookToLibrary(harryPotter);
     addBookToLibrary(gameOfThrones);
