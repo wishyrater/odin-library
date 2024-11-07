@@ -1,6 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
     const myLibrary = [];
 
+    class Book {
+        constructor(title, author, pages, read) {
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+            this.read = read;
+        }
+
+        toggleRead() {
+            this.read = !this.read;
+        }
+
+        addBookToLibrary(library) {
+            library.push(this);
+        }
+    }
+
     function Book(title, author, pages, read) {
         this.title = title;
         this.author = author;
@@ -11,13 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     Book.prototype.toggleRead = function() {
         this.read ? this.read = false : this.read = true;
     };
-
-    const thisfunc = function(){
-        console.log(123);
-    }
-
-    console.log(typeof thisfunc);
-    console.log(typeof thisfunc == 'function');
 
     const addBookToLibrary = (book) => myLibrary.push(book);
 
