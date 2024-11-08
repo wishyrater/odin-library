@@ -16,22 +16,52 @@ document.addEventListener("DOMContentLoaded", () => {
         addBookToLibrary(library) {
             library.push(this);
         }
+
+        getProperties() {
+            return [this.title, this.author, this.pages, this.read];
+        }
     }
 
-    function Book(title, author, pages, read) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
-    };
+    class Table {
+        constructor(name) {
+            this._name = name;
+        }
 
-    Book.prototype.toggleRead = function() {
-        this.read ? this.read = false : this.read = true;
-    };
+        renderTable(library) {
+            const tableBody = document.querySelector("tbody");
+            tableBody.innerHTML = '';
+            library.forEach((book) => {
+                // create the book info
+                const tableRow = document.createElement("tr");
+                for (let property of book.getProperties()) {
+                    const tableData = document.createElement("td");
+                    tableData.textContent = property;
+                    tableRow.appendChild(tableData);
+                }
 
-    const addBookToLibrary = (book) => myLibrary.push(book);
+                // create button for toggling read
+                const toggleReadCell = document.createElement("td");
+                const toggleReadButton = document.createElement("button");
+                toggleReadButton.textContent = 'Toggle read';
+                toggleReadButton.setAttribute("data-index", library.indexOf(book));
+                toggleReadButton.setAttribute("data-action", "toggle-read");
+                // TO DO: handle event listener in display class
+                toggleReadCell.appendChild(toggleReadButton);
+                tableRow.appendChild(toggleReadCell);
 
-    const tableBody = document.querySelector("tbody");
+                // create remove row button
+                const removeCell = document.createElement("td");
+                const removeButton = document.createElement("button");
+                removeButton.textContent = 'Remove';
+                removeButton.setAttribute("data-index", library.indexOf(book));
+                removeButton.setAttribute("data-action", "remove");
+                removeCell.appendChild(removeButton);
+                tableRow.appendChild(removeCell);
+
+                tableBody.appendChild(tableRow);
+            })
+        }
+    }
 
     function addBooksToTable() {
         tableBody.innerHTML = '';
