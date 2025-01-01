@@ -68,6 +68,7 @@ class DisplayController {
         this.library = new Library();
         this.dialog = document.querySelector("#dialog");
         this.showDialogButton = document.querySelector("#show-dialog-button");
+        this.cancelButton = document.querySelector('#cancel');
         this.confirmButton = document.querySelector("#confirm");
         this.titleInput = document.querySelector("#title");
         this.authorInput = document.querySelector("#author");
@@ -92,6 +93,11 @@ class DisplayController {
         this.showDialogButton.addEventListener("click", () => {
             this.dialog.showModal();
         });
+
+        this.cancelButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.dialog.close(e.target.value);
+        })
 
         this.confirmButton.addEventListener("click", (e) => {
             e.preventDefault();

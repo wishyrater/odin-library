@@ -25,24 +25,24 @@
 
     <button id="show-dialog-button">NEW BOOK</button>
     <dialog id="dialog">
-        <form method="dialog">
+        <form>
             <div class="dialog-items">
                 <div class="form-items">
                     <div class="form-item">
                         <label for="title">Title</label>
-                        <input id="title" type="text" name="title">
+                        <input id="title" type="text" name="title" min="2" max="50" required>
                     </div>
                     <div class="form-item">
                         <label for="author">Author</label>
-                        <input id="author" type="text" name="author">
+                        <input id="author" type="text" name="author" min="2" max="50" required>
                     </div>
                     <div class="form-item">
                         <label for="pages">Pages</label>
-                        <input id="pages" type="number" name="pages">
+                        <input id="pages" type="number" name="pages" max="5000" required>
                     </div>
                 </div>
                 <div class="form-buttons">
-                    <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
+                    <button id="cancel" value="cancel">Cancel</button>
                     <button id="confirm" value="default">Add book</button>
                 </div>
             </div>
