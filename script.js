@@ -100,8 +100,25 @@ class DisplayController {
         })
 
         this.confirmButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            this.dialog.close(e.target.value);
+            this.titleInput.setCustomValidity('');
+            if (!this.titleInput.validity.valid) {
+                this.titleInput.setCustomValidity('Expecting a book title between 2 and 50 characters');
+            }
+
+            this.authorInput.setCustomValidity('');
+            if (!this.authorInput.validity.valid) {
+                this.authorInput.setCustomValidity('Expecting author name between 2 and 50 characters');
+            }
+
+            this.pagesInput.setCustomValidity('');
+            if (!this.pagesInput.validity.valid) {
+                this.pagesInput.setCustomValidity('Expecting number');
+            }
+
+            if (this.titleInput.validity.valid && this.authorInput.validity.valid && this.pagesInput.validity.valid) {
+                e.preventDefault();
+                this.dialog.close(e.target.value);
+            }
         });
 
         this.dialog.addEventListener("close", () => {
